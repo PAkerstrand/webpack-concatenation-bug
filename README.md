@@ -32,7 +32,7 @@ For the code in our example, the path taken is the `else`-branch, which replaces
 one, rather than aliasing the variable name like
 
 ```js
-const { src_testProp: testProp = 'defaultValue' } = config;
+const { testProp: src_testProp = 'defaultValue' } = config;
 ```
 
 # Building
