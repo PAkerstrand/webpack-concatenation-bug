@@ -29,7 +29,16 @@ for (const identifier of allIdentifiers) {
 ```
 
 For the code in our example, the path taken is the `else`-branch, which replaces the name with a new
-one, rather than aliasing the variable name like
+one:
+
+```js
+const { src_testProp = 'defaultValue' } = config;
+```
+This code has a semantically different meaning than the input code, making the destructuring 
+assignment look at a different _(and non-existing)_ property, and always falling back to the default
+value.
+
+The expected output of the concatenated module would look like this:
 
 ```js
 const { testProp: src_testProp = 'defaultValue' } = config;
