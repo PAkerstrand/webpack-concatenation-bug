@@ -11,24 +11,22 @@ to serve assets from.
 
 We've narrowed down the bug to this part in `lib/optimize/ConcatenatedModule.js`:
 
-<pre>
 ```js
 for (const identifier of allIdentifiers) {
-	const r = identifier.range;
-	const path = getPathInAst(info.ast, identifier);
-	if (
-		path &&
-		path.length > 1 &&
-		path[1].type === "Property" &&
-		path[1].shorthand
-	) {
-		source.insert(r[1], `: ${newName}`);
-	} else {
-		source.replace(r[0], r[1] - 1, newName);
-	}
+  const r = identifier.range;
+  const path = getPathInAst(info.ast, identifier);
+  if (
+    path &&
+    path.length > 1 &&
+    path[1].type === "Property" &&
+    path[1].shorthand
+  ) {
+    source.insert(r[1], `: ${newName}`);
+  } else {
+    source.replace(r[0], r[1] - 1, newName);
+  }
 }
 ```
-</pre>
 
 For the code in our example, the path taken is the `else`-branch, which replaces the name with a new
 one, rather than aliasing the variable name like
